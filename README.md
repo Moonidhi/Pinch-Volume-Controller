@@ -76,13 +76,6 @@ Pinch-Volume-Controller/
 ├── README.md
 └── venv/ (optional)
 ```
-
----
-
-## 📸 Demo
-
-Add your screenshots or screen recording here.
-
 ---
 
 ## 🌟 Learning Outcome
