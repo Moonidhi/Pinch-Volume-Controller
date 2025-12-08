@@ -14,11 +14,9 @@ hands = mp_hands.Hands(
 
 cap = cv2.VideoCapture(0)
 
-# ✅ YOU CAN TUNE THESE
 MIN_DIST = 30    # fingers close
 MAX_DIST = 220   # fingers far
 
-# Smoothing
 prev_volume = 50
 SMOOTHING = 0.2   # lower = smoother
 
@@ -46,7 +44,6 @@ while True:
             thumb_tip = landmarks[4]
             index_tip = landmarks[8]
 
-            # Draw points
             cv2.circle(img, thumb_tip, 10, (0, 255, 0), cv2.FILLED)
             cv2.circle(img, index_tip, 10, (0, 255, 0), cv2.FILLED)
             cv2.line(img, thumb_tip, index_tip, (255, 255, 255), 2)
@@ -60,7 +57,7 @@ while True:
             # Map to 0–100
             target_volume = (dist - MIN_DIST) / (MAX_DIST - MIN_DIST) * 100
 
-            # ✅ Smooth the value
+            #  Smooth the value
             volume = int(prev_volume * (1 - SMOOTHING) + target_volume * SMOOTHING)
             prev_volume = volume
 
@@ -72,7 +69,6 @@ while True:
                 mp_hands.HAND_CONNECTIONS
             )
 
-    # ✅ UI PANEL
     cv2.rectangle(img, (20, 20), (340, 160), (0, 0, 0), -1)
 
     cv2.putText(img, "PINCH VOLUME CONTROL", (30, 50),
@@ -84,7 +80,6 @@ while True:
     cv2.putText(img, f"Volume: {volume}%", (30, 110),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
 
-    # ✅ Volume Bar
     bar_x1, bar_y1 = 30, 125
     bar_x2, bar_y2 = 300, 145
     cv2.rectangle(img, (bar_x1, bar_y1), (bar_x2, bar_y2), (255, 255, 255), 1)
